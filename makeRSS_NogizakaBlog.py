@@ -41,16 +41,23 @@ url_and_xmls = [
         },
 ]
 
+# 各XMLファイル名に対応するchannel要素を保存する辞書
+xml_data = {}
+
 for url_and_xml in url_and_xmls:
     url = url_and_xml['url']
     xml_file_name = url_and_xml['xml']
     include_phrase = url_and_xml.get('include_phrase', [])
 
-    # XMLのrootとchannelを作成
-    root = Element("rss", version="2.0")
-    channel = SubElement(root, "channel")
-    SubElement(channel, "title").text = "Latest Blogs"
-    SubElement(channel, "description").text = "Nogizaka46 Latest Blog Posts"
+    # xml_dataにchannel要素がなければ作成
+    if xml_file_name not in xml_data:
+        root = Element("rss", version="2.0")
+        channel = SubElement(root, "channel")
+        SubElement(channel, "title").text = "Latest Blogs"
+        SubElement(channel, "description").text = "Nogizaka46 Latest Blog Posts"
+        xml_data[xml_file_name] = {'root': root, 'channel': channel}
+    else:
+        channel = xml_data[xml_file_name]['channel']
 
     while url:
         print(f"Fetching URL: {url}")  # Debug
@@ -86,11 +93,12 @@ for url_and_xml in url_and_xmls:
             url = None
         print(f"Next URL: {url}")  # Debug
 
-    # XMLをきれいにして保存
+# 最後に各XMLファイルに書き出し
+for xml_file_name, data in xml_data.items():
+    root = data['root']
     xml_string = ET.tostring(root, 'utf-8')
     reparsed = minidom.parseString(xml_string)
     pretty_xml = reparsed.toprettyxml(indent="  ")
-
     with open(xml_file_name, 'wb') as f:
         f.write(pretty_xml.encode('utf-8'))
 
