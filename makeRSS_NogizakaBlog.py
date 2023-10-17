@@ -93,7 +93,7 @@ for url_and_xml in url_and_xmls:
     ml_string = tostring(root)
 
     # minidomできれいにする
-    dom = xml.dom.minidom.parseString(xml_string)
+    dom = xml.dom.minidom.parseString(ml_string) 
     pretty_xml = dom.toprettyxml(encoding="utf-8")
     
     with open(xml_file_name, 'wb') as f:
