@@ -19,26 +19,26 @@ url_and_xmls = [
             'xml': 'feed_Blog_Yumiki.xml',
             'include_phrase': [],
         },
-        #{
-        #    'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=40001&cd=MEMBER',
-        #    'xml': 'feed_Blog_Yumiki.xml',
-        #    'include_phrase': ['弓木'],
-        #},
-        #{
-        #    'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=48010&cd=MEMBER',
-        #    'xml': 'feed_Blog_Kanagawa.xml',
-        #    'include_phrase': [],
-        #},
-        #{
-        #    'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=40005&cd=MEMBER',
-        #    'xml': 'feed_Blog_Kanagawa.xml',
-        #    'include_phrase': ['金川'],
-        #},
-        #{
-        #    'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=55396&cd=MEMBER',
-        #    'xml': 'feed_Blog_Nogizaka.xml',
-        #    'include_phrase': [],
-        #},
+        {
+            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=40001&cd=MEMBER',
+            'xml': 'feed_Blog_Yumiki.xml',
+            'include_phrase': ['弓木'],
+        },
+        {
+            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=48010&cd=MEMBER',
+            'xml': 'feed_Blog_Kanagawa.xml',
+            'include_phrase': [],
+        },
+        {
+            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=40005&cd=MEMBER',
+            'xml': 'feed_Blog_Kanagawa.xml',
+            'include_phrase': ['金川'],
+        },
+        {
+            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=55396&cd=MEMBER',
+            'xml': 'feed_Blog_Nogizaka.xml',
+            'include_phrase': [],
+        },
 ]
 
 # 各XMLファイル名に対応するchannel要素を保存する辞書
