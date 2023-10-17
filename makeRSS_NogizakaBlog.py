@@ -6,7 +6,7 @@ from xml.etree import ElementTree as ET
 from xml.dom import minidom
 from datetime import datetime
 from html import unescape
-from xml.etree.ElementTree import Element, SubElement, ElementTree
+from xml.etree.ElementTree import Element, SubElement, ElementTree, tostring
 
 def prettify(elem):
     rough_string = ET.tostring(elem, 'utf-8')
