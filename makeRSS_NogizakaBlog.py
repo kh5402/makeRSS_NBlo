@@ -6,7 +6,7 @@ from xml.etree import ElementTree as ET
 from xml.dom import minidom
 from datetime import datetime
 from html import unescape
-from xml.etree.ElementTree import Element, SubElement, ElementTree
+from xml.etree.ElementTree import ElementTree, Element, tostring
 
 def prettify(elem):
     rough_string = ET.tostring(elem, 'utf-8')
@@ -90,7 +90,7 @@ for url_and_xml in url_and_xmls:
     tree = ElementTree(root)
     
     # XML文字列に変換
-    xml_string = ElementTree.tostring(root, 'utf-8')
+    ml_string = tostring(root)
 
     # minidomできれいにする
     dom = xml.dom.minidom.parseString(xml_string)
