@@ -35,7 +35,7 @@ url_and_xmls = [
             'include_phrase': ['金川'],
         },
         {
-            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?ima=5025&ct=55396',
+            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=55396&cd=MEMBER',
             'xml': 'feed_Blog_Nogizaka.xml',
             'include_phrase': [],
         },
@@ -43,6 +43,8 @@ url_and_xmls = [
 
 # 各XMLファイル名に対応するchannel要素を保存する辞書
 xml_data = {}
+
+page_number = 0  # ページ番号の初期化
 
 for url_and_xml in url_and_xmls:
     url = url_and_xml['url']
