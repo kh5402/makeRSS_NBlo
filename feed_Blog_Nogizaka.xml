@@ -1,2 +1,7 @@
-<?xml version='1.0' encoding='utf-8'?>
-<rss version="2.0"><channel><title>Latest Blogs</title><description>Nogizaka46 Latest Blog Posts</description></channel></rss>
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		<title>Latest Blogs</title>
+		<description>Nogizaka46 Latest Blog Posts</description>
+	</channel>
+</rss>

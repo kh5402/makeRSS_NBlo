@@ -1,2 +1,17 @@
-<?xml version='1.0' encoding='utf-8'?>
-<rss version="2.0"><channel><title>Latest Blogs</title><description>Nogizaka46 Latest Blog Posts</description><item><title>染まる☺︎弓木奈於</title><link>https://www.nogizaka46.com/s/n46/diary/detail/59152?ima=5436&amp;cd=MEMBER</link><pubDate>2020.12.22 19:00</pubDate></item><item><title>前髪、きりすぎた？弓木奈於</title><link>https://www.nogizaka46.com/s/n46/diary/detail/59093?ima=5436&amp;cd=MEMBER</link><pubDate>2020.12.17 16:48</pubDate></item></channel></rss>
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		<title>Latest Blogs</title>
+		<description>Nogizaka46 Latest Blog Posts</description>
+		<item>
+			<title>染まる☺︎弓木奈於</title>
+			<link>https://www.nogizaka46.com/s/n46/diary/detail/59152?ima=0730&amp;cd=MEMBER</link>
+			<pubDate>2020.12.22 19:00</pubDate>
+		</item>
+		<item>
+			<title>前髪、きりすぎた？弓木奈於</title>
+			<link>https://www.nogizaka46.com/s/n46/diary/detail/59093?ima=0730&amp;cd=MEMBER</link>
+			<pubDate>2020.12.17 16:48</pubDate>
+		</item>
+	</channel>
+</rss>
