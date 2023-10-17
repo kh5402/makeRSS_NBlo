@@ -15,22 +15,22 @@ def prettify(elem):
 
 url_and_xmls = [
         {
-            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?ct=55387&cd=MEMBER',
+            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=55387&cd=MEMBER',
             'xml': 'feed_Blog_Yumiki.xml',
             'include_phrase': [],
         },
         {
-            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?ct=40001&cd=MEMBER',
+            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=40001&cd=MEMBER',
             'xml': 'feed_Blog_Yumiki.xml',
             'include_phrase': ['弓木'],
         },
         {
-            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?ct=48010&cd=MEMBER',
+            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=48010&cd=MEMBER',
             'xml': 'feed_Blog_Kanagawa.xml',
             'include_phrase': [],
         },
         {
-            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?ct=40005&cd=MEMBER',
+            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=40005&cd=MEMBER',
             'xml': 'feed_Blog_Kanagawa.xml',
             'include_phrase': ['金川'],
         },
@@ -85,16 +85,17 @@ for url_and_xml in url_and_xmls:
                 SubElement(item, "pubDate").text = date
 
         # 次のページへのリンクがあるかチェック
-        #next_page_pattern = re.compile(r'<a href="(/s/n46/diary/MEMBER/list\?ima=\d+&amp;page=\d+&amp;ct=\d+&amp;cd=MEMBER)">')
-        #next_page_pattern = re.compile(r'<a [^>]*href="(/s/n46/diary/MEMBER/list\?ima=\d+&amp;page=\d+&amp;ct=\d+&amp;cd=MEMBER)".*?>\s*</a>')
-        next_page_pattern = re.compile(r'<a href="(/s/n46/diary/MEMBER/list\?ima=\d+&amp;page=\d+&amp;ct=\d+&amp;cd=MEMBER)">&gt;</a>')
-
+        next_page_pattern = re.compile(r'<a [^>]*href="([^"]*)"[^>]*>.*?>\s*</a>', re.DOTALL)
         next_page_match = next_page_pattern.search(html_content)
         print(next_page_match)
+
         if next_page_match:
-            url = 'https://www.nogizaka46.com' + next_page_match.group(1)
+            page_number += 1  # ページ番号を1増やす
+            next_url = re.sub(r'page=\d+', f'page={page_number}', url)  # URL内のpage数を更新
+            url = next_url
         else:
-            url = None
+            url = None  # ページがなければNoneに設定
+
         print(f"Next URL: {url}")  # Debug
 
 # 最後に各XMLファイルに書き出し
