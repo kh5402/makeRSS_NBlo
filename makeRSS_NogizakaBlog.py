@@ -46,19 +46,18 @@ for url_and_xml in url_and_xmls:
     xml_file_name = url_and_xml['xml']
     include_phrase = url_and_xml.get('include_phrase', [])
 
-    # XMLの初期化
+    # XMLのrootとchannelを作成
     root = Element("rss", version="2.0")
     channel = SubElement(root, "channel")
     SubElement(channel, "title").text = "Latest Blogs"
     SubElement(channel, "description").text = "Nogizaka46 Latest Blog Posts"
 
-    while url:  # URLがNoneになるまで続ける
-        print(f"Fetching URL: {url}")  # 確認用
-
+    while url:
+        print(f"Fetching URL: {url}")  # Debug
         response = requests.get(url)
         html_content = response.text
 
-        # 記事を見つける
+        # 記事のリンク、タイトル、日付を取得
         link_pattern = re.compile(r'<a class="bl--card js-pos a--op hv--thumb" href="([^"]+)">')
         title_pattern = re.compile(r'<p class="bl--card__ttl">([^<]+)</p>')
         date_pattern = re.compile(r'<p class="bl--card__date">([^<]+)</p>')
@@ -67,36 +66,32 @@ for url_and_xml in url_and_xmls:
         titles = title_pattern.findall(html_content)
         dates = date_pattern.findall(html_content)
 
-        print(f"Found links: {links}")  # 確認用
-        print(f"Found titles: {titles}")  # 確認用
-        print(f"Found dates: {dates}")  # 確認用
+        print(f"Found links: {links}")  # Debug
+        print(f"Found titles: {titles}")  # Debug
+        print(f"Found dates: {dates}")  # Debug
 
         for link, title, date in zip(links, titles, dates):
-            if any(phrase in title for phrase in include_phrase):
+            if not include_phrase or any(phrase in title for phrase in include_phrase):
                 item = SubElement(channel, "item")
                 SubElement(item, "title").text = title
                 SubElement(item, "link").text = f"https://www.nogizaka46.com{link}"
                 SubElement(item, "pubDate").text = date
 
-        # 次のページへ
+        # 次のページへのリンクがあるかチェック
         next_page_pattern = re.compile(r'<a href="(/s/n46/diary/MEMBER/list\?ima=\d+&amp;page=\d+&amp;ct=\d+&amp;cd=MEMBER)">')
         next_page_match = next_page_pattern.search(html_content)
-        url = f"https://www.nogizaka46.com{next_page_match.group(1)}" if next_page_match else None
+        if next_page_match:
+            url = 'https://www.nogizaka46.com' + next_page_match.group(1)
+        else:
+            url = None
+        print(f"Next URL: {url}")  # Debug
 
-        print(f"Next URL: {url}")  # 確認用
-    
-    # XMLを保存
-    # ElementTreeオブジェクトを作成
-    tree = ElementTree(root)
-    
-    # XML文字列に変換
-    ml_string = tostring(root)
+    # XMLをきれいにして保存
+    xml_string = ET.tostring(root, 'utf-8')
+    reparsed = minidom.parseString(xml_string)
+    pretty_xml = reparsed.toprettyxml(indent="  ")
 
-    # minidomできれいにする
-    dom = xml.dom.minidom.parseString(ml_string) 
-    pretty_xml = dom.toprettyxml(encoding="utf-8")
-    
     with open(xml_file_name, 'wb') as f:
-        f.write(pretty_xml)
-    
-print("Done!")  # 確認用
+        f.write(pretty_xml.encode('utf-8'))
+
+print("Done!")
