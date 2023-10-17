@@ -90,20 +90,17 @@ for url_and_xml in url_and_xmls:
             if "該当するデータがございません" in title:
                 url = None  # 次のページがないので、ループを終了
                 break  # forループを抜ける
-        
-        # 次のページへのリンクがあるかチェック
-        next_page_pattern = re.compile(r'<a [^>]*href="([^"]*)"[^>]*>.*?>\s*</a>', re.DOTALL)
-        next_page_match = next_page_pattern.search(html_content)
-        print(next_page_match)
-
-        if next_page_match:
-            page_number += 1  # ページ番号を1増やす
+            
+        if url:
+            page_number += 1
             next_url = re.sub(r'page=\d+', f'page={page_number}', url)  # URL内のpage数を更新
             url = next_url
         else:
-            url = None  # ページがなければNoneに設定
+            break  # ループを抜ける
+    else:
+        url = None  # ページがなければNoneに設定
 
-        print(f"Next URL: {url}")  # Debug
+    print(f"Next URL: {url}")  # Debug
 
 # 最後に各XMLファイルに書き出し
 for xml_file_name, data in xml_data.items():
