@@ -86,7 +86,9 @@ for url_and_xml in url_and_xmls:
 
         # 次のページへのリンクがあるかチェック
         #next_page_pattern = re.compile(r'<a href="(/s/n46/diary/MEMBER/list\?ima=\d+&amp;page=\d+&amp;ct=\d+&amp;cd=MEMBER)">')
-        next_page_pattern = re.compile(r'<a [^>]*href="(/s/n46/diary/MEMBER/list\?ima=\d+&amp;page=\d+&amp;ct=\d+&amp;cd=MEMBER)".*?>\s*</a>')
+        #next_page_pattern = re.compile(r'<a [^>]*href="(/s/n46/diary/MEMBER/list\?ima=\d+&amp;page=\d+&amp;ct=\d+&amp;cd=MEMBER)".*?>\s*</a>')
+        next_page_pattern = re.compile(r'<a href="(/s/n46/diary/MEMBER/list\?ima=\d+&amp;page=\d+&amp;ct=\d+&amp;cd=MEMBER)">&gt;</a>')
+
         next_page_match = next_page_pattern.search(html_content)
         print(next_page_match)
         if next_page_match:
