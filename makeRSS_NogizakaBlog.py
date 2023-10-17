@@ -86,6 +86,11 @@ for url_and_xml in url_and_xmls:
                 SubElement(item, "link").text = f"https://www.nogizaka46.com{link}"
                 SubElement(item, "pubDate").text = date
 
+        for title in titles:
+            if "該当するデータがございません" in title:
+                url = None  # 次のページがないので、ループを終了
+                break  # forループを抜ける
+        
         # 次のページへのリンクがあるかチェック
         next_page_pattern = re.compile(r'<a [^>]*href="([^"]*)"[^>]*>.*?>\s*</a>', re.DOTALL)
         next_page_match = next_page_pattern.search(html_content)
