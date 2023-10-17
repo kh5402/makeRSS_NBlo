@@ -87,5 +87,5 @@ for url_and_xml in url_and_xmls:
     tree = ElementTree(root)
     with open(xml_file_name, 'wb') as f:
         tree.write(f, encoding='utf-8', xml_declaration=True)
-
+    
 print("Done!")  # 確認用
