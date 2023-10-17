@@ -1,6 +1,7 @@
 import os
 import re
 import requests
+import xml.dom.minidom
 from xml.etree import ElementTree as ET
 from xml.dom import minidom
 from datetime import datetime
@@ -83,10 +84,19 @@ for url_and_xml in url_and_xmls:
         url = f"https://www.nogizaka46.com{next_page_match.group(1)}" if next_page_match else None
 
         print(f"Next URL: {url}")  # 確認用
-
+    
     # XMLを保存
+    # ElementTreeオブジェクトを作成
     tree = ElementTree(root)
+    
+    # XML文字列に変換
+    xml_string = ElementTree.tostring(root, 'utf-8')
+
+    # minidomできれいにする
+    dom = xml.dom.minidom.parseString(xml_string)
+    pretty_xml = dom.toprettyxml(encoding="utf-8")
+    
     with open(xml_file_name, 'wb') as f:
-        tree.write(f, encoding='utf-8', xml_declaration=True)
+        f.write(pretty_xml)
     
 print("Done!")  # 確認用
