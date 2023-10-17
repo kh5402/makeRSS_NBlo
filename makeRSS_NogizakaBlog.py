@@ -6,6 +6,11 @@ from xml.dom import minidom
 from datetime import datetime
 from html import unescape
 
+def prettify(elem):
+    rough_string = ET.tostring(elem, 'utf-8')
+    reparsed = minidom.parseString(rough_string)
+    return reparsed.toprettyxml(indent="  ")
+
 url_and_xmls = [
         {
             'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?ct=55387&cd=MEMBER',
@@ -74,6 +79,13 @@ for url_and_xml in url_and_xmls:
             ET.SubElement(new_item, "link").text = link
             ET.SubElement(new_item, "pubDate").text = date
 
+        # 次のページへのリンクがあるかチェック
+        next_page_match = re.search(r'<a [^>]*href="([^"]*)"[^>]*>.*?>\s*<\/a>', html_content)
+        if next_page_match:
+            url = 'https://www.nogizaka46.com' + next_page_match.group(1)
+        else:
+            url = None
+                
     tree = ET.ElementTree(root)
     with open(xml_file_name, 'wb') as f:
         f.write(prettify(root).encode('utf-8'))
