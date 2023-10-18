@@ -65,6 +65,16 @@ url_and_xmls = [
         #    'include_phrase': ['一ノ瀬'],
         #},
         {
+            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=36749&cd=MEMBER',
+            'xml': 'feed_Blog_Ito.xml',
+            'include_phrase': [],
+        },
+        {
+            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=40004&cd=MEMBER',
+            'xml': 'feed_Blog_Ito.xml',
+            'include_phrase': ['伊藤'],
+        },
+        {
             'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=55389&cd=MEMBER',
             'xml': 'feed_Blog_Inoue.xml',
             'include_phrase': [],
