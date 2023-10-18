@@ -36,8 +36,13 @@ url_and_xmls = [
         },
         {
             'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=55396&cd=MEMBER',
-            'xml': 'feed_Blog_Nogizaka.xml',
+            'xml': 'feed_Blog_Ioki.xml',
             'include_phrase': [],
+        },
+        {
+            'url': 'https://www.nogizaka46.com/s/n46/diary/MEMBER/list?page=0&ct=40007&cd=MEMBER',
+            'xml': 'feed_Blog_Ioki.xml',
+            'include_phrase': ['五百城'],
         },
 ]
 
