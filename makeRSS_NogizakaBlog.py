@@ -49,9 +49,10 @@ url_and_xmls = [
 # 各XMLファイル名に対応するchannel要素を保存する辞書
 xml_data = {}
 
-page_number = 0  # ページ番号の初期化
-
 for url_and_xml in url_and_xmls:
+    
+    page_number = 0  # ページ番号の初期化
+    
     url = url_and_xml['url']
     xml_file_name = url_and_xml['xml']
     include_phrase = url_and_xml.get('include_phrase', [])
