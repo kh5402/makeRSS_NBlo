@@ -25,6 +25,9 @@ jobs:
     - name: Run makeRSS Script
       run: python3 makeRSS_NogizakaBlog.py  # Pythonファイルのパスを適切に設定してね
       continue-on-error: true  # エラーが出たら次に進む
+
+    - name: Pull latest changes
+      run: git pull origin main || exit 0  # 失敗しても続行
     
     - name: Commit and push changes
       run: |
